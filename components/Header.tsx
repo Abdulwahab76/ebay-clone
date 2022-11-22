@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronDownIcon,
   BellIcon,
@@ -12,6 +12,7 @@ import Link from "next/link";
 type Props = {};
 
 const Header = ({}: Props) => {
+  const [show, setShow] = useState(false);
   const connectWithMetaMask = useMetamask();
   const disconnect = useDisconnect();
   const address = useAddress();
@@ -32,7 +33,9 @@ const Header = ({}: Props) => {
             </button>
           )}
 
-          <p className="headerLink">Daily Deals</p>
+          <p className="headerLink" id="d">
+            Daily Deals
+          </p>
           <p className="headerLink">Help & Contact</p>
         </div>
         <div className="flex text-sm space-x-4 items-center ">
@@ -40,8 +43,23 @@ const Header = ({}: Props) => {
           <p className="headerLink">Sell</p>
           <p className="headerLink">WatchList</p>
           <Link href="/addItem">
-            <p className="headerLink hover:link">
+            <p
+              className="headerLink hover:link"
+              onMouseOver={() => setShow(true)}
+              onMouseLeave={() => setShow(false)}
+            >
               Add to inventory <ChevronDownIcon className="h-5 w-5" />
+              <div
+                className={`${
+                  show ? "inline-flex" : "hidden"
+                } absolute right-16 bg-white text-1xl z-100 top-10 shadow-md text-black`}
+              >
+                <ul className="font-normal py-2  space-y-2">
+                  <li className="hover:list-hover px-2">Add item</li>
+
+                  <li className="hover:list-hover px-2">Not Interested!</li>
+                </ul>
+              </div>
             </p>
           </Link>
           <BellIcon className="h-5 w-5" />
@@ -78,7 +96,10 @@ const Header = ({}: Props) => {
           />
         </div>
 
-        <button className="hidden sm:inline bg-blue-600 px-4 md:px-8 py-2 border-2 border-blue-600 text-white">
+        <button
+          className={`hidden sm:inline bg-blue-600
+        px-4 md:px-8 py-2 border-2 border-blue-600 text-white`}
+        >
           Search
         </button>
         <Link href="/create">
@@ -100,7 +121,6 @@ const Header = ({}: Props) => {
           </p>
         ))}
       </section>
-   
     </div>
   );
 };

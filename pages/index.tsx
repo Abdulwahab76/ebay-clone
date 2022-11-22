@@ -31,11 +31,11 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto">
             {listings?.map((listing) => (
               <div
-                className="flex items-center flex-col card hover:scale-105 transition-all duration-150 ease-in-out"
+                className="flex max-h-4xl items-center flex-col card hover:scale-105 transition-all duration-150 ease-in-out"
                 key={listing.id}
               >
-                <div className="flex-1  flex flex-col items-center">
-                  <MediaRenderer className="w-44" src={listing.asset.image} />
+                <div className="flex-1 w-full flex flex-col items-center">
+                  <MediaRenderer className="w-[170px] md:w-[120px]" src={listing.asset.image} />
                 </div>
 
                 <div className="pt-2 flex flex-col justify-around w-full space-y-4">
